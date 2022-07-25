@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="acme_blog.mon_service" class="Acme\BlogBundle\MonService">
+            <argument type="service" id="logger" on-invalid="null"/>
+            <argument type="collection" id="connections">
+                <argument key="0">connection1</argument>
+                <argument key="1">connection2</argument>
+            </argument>
+            <call method="setEventDispatcher">
+                <argument type="service" id="event_dispatcher" on-invalid="ignore"/>
+            </call> 
+            <call method="addDatas">
+                <argument type="collection">
+                    <argument key="0">gigi</argument>
+                    <argument key="1">dede</argument>
+                </argument>
+            </call>
+        </service>
+
+        <service id="Acme\BlogBundle\MonService" alias="acme_blog.mon_service" public="true"/>
+
+        <service id="acme_blog.default_controller" class="Acme\BlogBundle\Controller\DefaultController" public="true">
+            <call method="setContainer">
+                <argument type="service" id="Psr\Container\ContainerInterface"/>
+            </call>
+            <tag name="container.service_subscriber"/>
+            <argument type="service" id="acme_blog.mon_service"/>
+        </service>
+
+    </services>
+
+</container>

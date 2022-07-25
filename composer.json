@@ -1,0 +1,22 @@
+{
+    "name": "acme/blog-bundle",
+    "description": "Blog",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Acme\\BlogBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Acme\\BlogBundle\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Florent",
+            "email": "florent.cussatlegras@gmail.com"
+        }
+    ]
+}
